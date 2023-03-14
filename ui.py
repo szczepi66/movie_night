@@ -27,7 +27,7 @@ while exit == True:
         print(2)
         # exit = False
     elif decision == 8:
-        scrap.scrappy()
+        scrap.scrap()
         # exit = False
     elif decision == 0:
         print("Do zobaczenia później")
