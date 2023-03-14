@@ -1,4 +1,5 @@
 import scrap
+import operacje_z_baza_filmow
 import os
 os.system('cls||clear')
 ui = '''
@@ -18,7 +19,7 @@ while exit == True:
     decision = int(input(ui))
     os.system('cls||clear')
     if decision == 1:
-        print(1)
+        operacje_z_baza_filmow.random_movie()
         # exit = False
     elif decision == 2:
         print(2)
