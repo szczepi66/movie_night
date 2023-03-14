@@ -1,9 +1,8 @@
 import sqlite3
-import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By 
 from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 import time
 
 def insertVaribleIntoTable(title, genre, year, rating):
@@ -30,20 +29,23 @@ def insertVaribleIntoTable(title, genre, year, rating):
             sqliteConnection.close()
             # print("The SQLite connection is closed")
 
-# conn = sqlite3.connect('movies.db')
-# c = conn.cursor()
+conn = sqlite3.connect('movies.db')
+c = conn.cursor()
 
-# command1 = """CREATE TABLE IF NOT EXISTS
-# movies(title TEXT, genre TEXT, year INTEGER, rating REAL)"""
+command1 = """CREATE TABLE IF NOT EXISTS
+movies(title TEXT, genre TEXT, year INTEGER, rating REAL)"""
 
-# c.execute(command1)
+c.execute(command1)
 
-# conn.commit()
+conn.commit()
 # conn.close()
 
 def cookies():
     trust_consent = driver.find_element(By.ID, "buttons")
     reject_consent = trust_consent.find_element(By.ID, "didomi-notice-agree-button").click()
+    driver.implicitly_wait(1)
+    reklama = driver.find_element(By.CLASS_NAME, "ws")
+    skip_reklama = reklama.find_element(By.CLASS_NAME, "ws__skipButton").click()
 
 def scrolling_page():
     for i in range(150):
@@ -62,14 +64,14 @@ driver.get("https://www.filmweb.pl/ranking/film")
 
 driver.implicitly_wait(3)
 cookies()
-driver.implicitly_wait(3)
+time.sleep(25)
 scrolling_page()
 ranking = scraping()
 
 for r in range(0,len(ranking)):
     insertVaribleIntoTable(ranking[r].find_element(By.CLASS_NAME , 'rankingType__title').text,
-                        ranking[r].find_element(By.CLASS_NAME , 'rankingType__year').text,
                         ranking[r].find_element(By.CLASS_NAME , 'rankingType__genres').text[7:],
+                        ranking[r].find_element(By.CLASS_NAME , 'rankingType__year').text,
                         ranking[r].find_element(By.CLASS_NAME , 'rankingType__rate--value').text)
 
 
