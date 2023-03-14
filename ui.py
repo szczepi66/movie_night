@@ -1,3 +1,4 @@
+import scrap
 import os
 os.system('cls||clear')
 ui = '''
@@ -18,12 +19,18 @@ while exit == True:
     os.system('cls||clear')
     if decision == 1:
         print(1)
-        exit = False
+        # exit = False
     elif decision == 2:
         print(2)
-        exit = False
+        # exit = False
     elif decision == 3:
-        print("Bye bye, see you soon")
+        print(2)
+        # exit = False
+    elif decision == 8:
+        scrap.scrappy()
+        # exit = False
+    elif decision == 0:
+        print("Do zobaczenia później")
         exit = False
     else:
-        print("There is something wrong with your input try again\n")
+        print("Coś poszło nie tak\n")
