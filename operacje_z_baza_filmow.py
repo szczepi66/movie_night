@@ -8,25 +8,32 @@ def what_to_add():
     return title, genre, year, rating
 
 def random_movie():
+    conn = sqlite3.connect('movies.db')
+    c = conn.cursor()
     command = "SELECT * FROM movies ORDER BY RANDOM() LIMIT 1;"
     c.execute(command)
     print(c.fetchall())
+    conn.commit()
+    conn.close()
 
-def choose_movie(genre, year, rating):
-    command = "SELECT * FROM movies WHERE genre = " + genre
-    command2 = "SELECT * FROM movies WHERE year = " + year
-    command3 = "SELECT * FROM movies WHERE rating = " + rating
-    c.execute(command)
-    c.execute(command2)
-    print(c.fetchall())
+# def choose_movie(genre, year, rating):
+    # command = "SELECT * FROM movies WHERE genre = " + genre
+    # command2 = "SELECT * FROM movies WHERE year = " + year
+    # command3 = "SELECT * FROM movies WHERE rating = " + rating
+    # c.execute(command)
+    # c.execute(command2)
+    # print(c.fetchall())
+    # conn.commit()
+    # conn.close()
     
 
 
 creating_table = "CREATE TABLE IF NOT EXISTS movies(title TEXT, genre TEXT, year INTEGER, rating REAL)"
 insert_into = "INSERT INTO movies(title, genre, year, rating)VALUES (?, ?, ?, ?);"
 
-conn = sqlite3.connect('movies.db')
-c = conn.cursor()
+
+# conn = sqlite3.connect('movies.db')
+# c = conn.cursor()
 
 # c.execute(creating_table)
 
@@ -38,13 +45,13 @@ c = conn.cursor()
 # # c.execute('DELETE FROM movies WHERE rating = 7.31')
 # print(c.fetchall())
 
-genre = input("podaj gatunek")
-year = input("podaj rok")
-rating = input("podaj raing")
+# genre = input("podaj gatunek")
+# year = input("podaj rok")
+# rating = input("podaj raing")
 
-choose_movie(genre, year, rating)
+# choose_movie(genre, year, rating)
 
 # random_movie()
 
-conn.commit()
-conn.close()
+# conn.commit()
+# conn.close()
